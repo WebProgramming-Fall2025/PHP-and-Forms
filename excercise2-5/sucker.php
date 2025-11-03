@@ -15,12 +15,12 @@
 				if (empty($name) || empty($section) || empty($creditNum) || empty($creditType)) {
 					echo "
 						<h1>Sorry</h1>
-						<p>You didn't fill out the form completely. <a href='./buyagrade.html' target='_self' rel='noopenner noreferrer'>Try again?</a></p>
-						";
+						<p>You didn't fill out the form completely. <a href='./buyagrade.html' target='_self' rel='noopener noreferrer'>Try again?</a></p>
+					";
 				} else {
-					$capture = implode(';', $_POST) . "\n";
+					$capture = "$name; $section; $creditNum; $creditType\n";
 					file_put_contents('suckers.html', $capture, FILE_APPEND);
-					$getHtml = file_get_contents('suckers.html');
+					$getHtml = nl2br(file_get_contents('suckers.html'));
 					echo "
 						<h1>Thanks, sucker!</h1>
 						<p>Your information has been recorded.</p>
@@ -31,9 +31,8 @@
 						</dl>
 						<p>Here are all the suckers who have submitted here:</p>
 						<pre>$getHtml</pre>
-						";
+					";
 				}
-			
 			}
 		?>
 	</body>
